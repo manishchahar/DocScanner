@@ -125,6 +125,14 @@ class FileUtility{
             return(error.localizedDescription.description)
         }
     }
+    
+//    func replaceFile(directory:URL,file:Data,fileName:String)->String {
+//        do {
+//            try fileManager.re
+//        } catch <#pattern#> {
+//            <#statements#>
+//        }
+//    }
     func readFile(atPath path : URL) -> Data? {
         do {
             let fileData = try fileManager.contents(atPath: path.path)
@@ -223,15 +231,73 @@ class FileUtility{
             }
         }
     }
+    
+    func getSize(ofDirectory directoryUrl : URL) -> String {
+        // get your directory url
+        var size = "Bytes"
+        // check if the url is a directory
+        if (try? directoryUrl.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true {
+            print("url is a folder url")
+            // lets get the folder files
+            var folderSize = 0
+            (try? FileManager.default.contentsOfDirectory(at: directoryUrl, includingPropertiesForKeys: nil))?.lazy.forEach {
+                folderSize += (try? $0.resourceValues(forKeys: [.totalFileAllocatedSizeKey]))?.totalFileAllocatedSize ?? 0
+            }
+            // format it using NSByteCountFormatter to display it properly
+            let  byteCountFormatter =  ByteCountFormatter()
+            byteCountFormatter.allowedUnits = .useBytes
+            byteCountFormatter.countStyle = .file
+            let folderSizeToDisplay = byteCountFormatter.string(for: folderSize) ?? ""
+        size = (folderSize/1000000).description + "MB" // "X,XXX,XXX bytes"
+  // "X,XXX,XXX bytes"
+        }
+        return size
+    }
+    func getFileSize(ofFolder url:URL)->String  {
+        // get your directory url
+        var size = ""
+        // get your directory url
+        let documentsDirectoryURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        // check if the url is a directory
+        if (try? documentsDirectoryURL.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true {
+            var folderSize = 0
+            (FileManager.default.enumerator(at: documentsDirectoryURL, includingPropertiesForKeys: nil)?.allObjects as? [URL])?.lazy.forEach {
+                folderSize += (try? $0.resourceValues(forKeys: [.totalFileAllocatedSizeKey]))?.totalFileAllocatedSize ?? 0
+            }
+            let  byteCountFormatter =  ByteCountFormatter()
+            byteCountFormatter.allowedUnits = .useBytes
+            byteCountFormatter.countStyle = .file
+            let sizeToDisplay = byteCountFormatter.string(for: folderSize) ?? ""
+            size = (folderSize/1000000).description + "MB" // "X,XXX,XXX bytes"
+        }
+        return size
+    }
+    func fileSize(fileAt fileUrl:URL) -> String {
+        var fileSize : UInt64 = 0
+        do {
+            //return [FileAttributeKey : Any]
+            let attr = try FileManager.default.attributesOfItem(atPath: fileUrl.path)
+            fileSize = attr[FileAttributeKey.size] as! UInt64
+            //if you convert to NSDictionary, you can get file size old way as well.
+            let dict = attr as NSDictionary
+            fileSize = dict.fileSize()
+        } catch {
+            print("Error: \(error)")
+        }
+        fileSize = fileSize/1000000
+        return fileSize.description + "MB"
+    }
 }
 
 
+
 public enum FileType {
-    case folder,pdf,doc,txt,png,gpeg,image
+    case folder,pdf,doc,txt,png,jpg,image
 }
 struct File {
     let name : String!
     let type : FileType!
+    let size : String!
     let image : UIImage!
     let path : String!
     let url : URL!
@@ -244,13 +310,26 @@ struct File {
             name = fileUrl.lastPathComponent
             type = .folder
             image = UIImage(named: "folder")?.tint(with: Theme.folderColor)
+            size = FileUtility.shared.getSize(ofDirectory: self.url)
         case "pdf":
             name = fileUrl.deletingPathExtension().lastPathComponent
             type = .pdf
+            self.size = FileUtility.shared.fileSize(fileAt: self.url)
             image = UIImage(named: "pictureAsPdf")?.tint(with:Theme.pdfIconColor)
+        case "jpg":
+            name = fileUrl.deletingPathExtension().lastPathComponent
+            type = .jpg
+            self.size = FileUtility.shared.fileSize(fileAt: self.url)
+            image = UIImage(named: "pictureAsPdf")
+        case "png":
+            name = fileUrl.deletingPathExtension().lastPathComponent
+            type = .png
+            self.size = FileUtility.shared.fileSize(fileAt: self.url)
+            image = UIImage(named: "pictureAsPdf")
         default:
             name = fileUrl.lastPathComponent
             type = .folder
+            size = FileUtility.shared.getFileSize(ofFolder: self.url)
             image = UIImage(named: "folder")
         }
     }

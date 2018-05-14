@@ -98,8 +98,24 @@ class Animation: NSObject{
         sender.view!.center = CGPoint(x: sender.view!.center.x + translation.x, y: sender.view!.center.y + translation.y)
         sender.setTranslation(CGPoint.zero, in: self.self.parentView)
     }
-    
-    
+ 
+    func scale(view:UIView) {
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            view.transform = CGAffineTransform(translationX: 2, y: 2)
+        }) { (isCompleted) in
+            view.transform = CGAffineTransform(scaleX: 2, y: 2)
+        }
+        
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            view.transform = CGAffineTransform(scaleX: 2, y: 2)
+        }) { (isCompleted) in
+            if(isCompleted){
+             view.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+        }
+    }
     
     
 }

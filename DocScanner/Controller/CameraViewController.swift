@@ -18,7 +18,7 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
     @IBOutlet var flashOptionView: UIView!
     
     @IBAction func flashOnAction(_ sender: UIButton) {
-        self.flashBtnOutlet.setImage(UIImage(named: "flash_on")?.tint(with:UIColor.green), for: .normal)
+        self.flashBtnOutlet.setImage(UIImage(named: "flash_on")?.tint(with:UIColor.white), for: .normal)
 
         let device = AVCaptureDevice.default(for: AVMediaType.video)
         do{
@@ -32,7 +32,7 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
     }
     
     @IBAction func flashoffAction(_ sender: UIButton) {
-        self.flashBtnOutlet.setImage(UIImage(named: "flash_off")?.tint(with:UIColor.green), for: .normal)
+        self.flashBtnOutlet.setImage(UIImage(named: "flash_off")?.tint(with:UIColor.white), for: .normal)
 
 
         let device = AVCaptureDevice.default(for: AVMediaType.video)
@@ -85,16 +85,19 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
     var devices : [AVCaptureDevice] = {
         let captureDevices = AVCaptureDevice.devices().filter{ $0.hasMediaType(AVMediaType.video) && $0.position == AVCaptureDevice.Position.back
         }
+    
         return captureDevices
     }()
     
     @IBAction func capturebtnAction(_ sender: UIButton) {
         if let videoConnection = stillImageOutput.connection(with: AVMediaType.video) {
+            videoConnection.videoOrientation = .portrait
             stillImageOutput.captureStillImageAsynchronously(from: videoConnection) {
                 (imageDataSampleBuffer, error) -> Void in
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer!)
                 if let image = UIImage(data: imageData!){
-                    self.delegate?.didCaptured(image: image)
+                
+                    self.delegate?.didCaptured(image: image.rotate(radians: 0))
                 }
             }
         }
@@ -107,19 +110,25 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
     var error: NSError?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.flashBtnOutlet.setImage(UIImage(named: "flash_off")?.tint(with:UIColor.green), for: .normal)
-    }
-    override func viewDidAppear(_ animated: Bool) {
+        self.flashBtnOutlet.setImage(UIImage(named: "flash_off")?.tint(with:UIColor.white), for: .normal)
         DispatchQueue.main.async {
             self.prepareCamera()
+            self.setVideoOrientation()
         }
+        self.captureBtnOutlet.setImage(UIImage(named: "camera")?.tint(with: UIColor.blue), for: .normal)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+
     }
     
     
     
     override func viewDidLayoutSubviews() {
         self.previewLayer?.frame = CGRect(x: 0, y: 0, width: Int(self.cameraView!.frame.width), height: Int(self.cameraView!.frame.height))
-        
+        setVideoOrientation()
+    }
+    
+    func setVideoOrientation() {
         let videoOrientation: AVCaptureVideoOrientation
         switch UIApplication.shared.statusBarOrientation {
         case .portrait:
@@ -134,7 +143,6 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
             videoOrientation = .portrait
         }
         previewLayer?.connection?.videoOrientation = videoOrientation
-        
     }
     
     
@@ -155,6 +163,8 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
                 captureSession.addOutput(stillImageOutput)
             }
             previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+            previewLayer?.connection?.videoOrientation = .portrait
+            
             //            previewLayer.position = CGPoint(view.bounds.midX, view.bounds.midY)
             previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
             previewLayer?.frame = self.cameraView!.frame
@@ -169,6 +179,7 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
     
     func saveToCamera(sender: UITapGestureRecognizer) {
         if let videoConnection = stillImageOutput.connection(with: AVMediaType.video) {
+            videoConnection.videoOrientation = .portrait
             stillImageOutput.captureStillImageAsynchronously(from: videoConnection) {
                 (imageDataSampleBuffer, error) -> Void in
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer!)

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -12,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--HOME-->
+        <!--All Files-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="BrowserViewController" customModule="DocScanner" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,7 +37,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="HOME" id="uOl-Sa-sug">
+                    <navigationItem key="navigationItem" title="All Files" id="uOl-Sa-sug">
                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="SWf-uP-I9x">
                             <color key="tintColor" red="0.0" green="0.61568627450000002" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -167,19 +166,22 @@
                                     <constraint firstAttribute="height" constant="44" id="OdR-Ys-fzX"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="vfdc" image="photo_icon" id="gXy-yD-wCv">
+                                    <barButtonItem image="photo_icon" id="gXy-yD-wCv">
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="libraryAction:" destination="JiV-VH-6eu" id="VUu-N4-nOX"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="u6h-ys-3Sz"/>
-                                    <barButtonItem title="vvv" image="enhancedCamera" id="m3o-Q0-n6j">
+                                    <barButtonItem tag="1" title="vvv" image="enhancedCamera" id="m3o-Q0-n6j">
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="cameraAction:" destination="JiV-VH-6eu" id="OxT-fz-5cc"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dZQ-IV-ajO"/>
-                                    <barButtonItem image="cloudDownload_icon" id="Ll8-Cn-IYL">
+                                    <barButtonItem tag="2" image="cloudDownload_icon" style="plain" id="Ll8-Cn-IYL">
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="downloadAction:" destination="JiV-VH-6eu" id="fFw-M5-VgJ"/>
                                         </connections>
@@ -200,23 +202,33 @@
                         <viewLayoutGuide key="safeArea" id="4b2-lR-yN3"/>
                     </view>
                     <navigationItem key="navigationItem" title="Create" id="lGn-Do-Ln2">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="bLh-ZP-ryc">
-                            <connections>
-                                <action selector="saveBtnAction:" destination="JiV-VH-6eu" id="wBA-VM-eIq"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="save" id="bLh-ZP-ryc">
+                                <connections>
+                                    <action selector="saveBtnAction:" destination="JiV-VH-6eu" id="wBA-VM-eIq"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="vaI-Hu-4ZS">
+                                <connections>
+                                    <action selector="editAction:" destination="JiV-VH-6eu" id="vO8-dN-QeM"/>
+                                    <segue destination="Vc1-Ku-mZc" kind="show" id="lGI-i8-IzA"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="cameraBtn" destination="m3o-Q0-n6j" id="pja-Om-jND"/>
                         <outlet property="container" destination="nRb-kl-nOq" id="aTv-Uu-SAY"/>
                         <outlet property="downloadBtn" destination="Ll8-Cn-IYL" id="0Y1-7d-CsV"/>
+                        <outlet property="editBtnOutlet" destination="vaI-Hu-4ZS" id="euA-6h-JgU"/>
                         <outlet property="libraryBtn" destination="gXy-yD-wCv" id="DAa-Aw-dtH"/>
                         <outlet property="saveBtnOutlet" destination="bLh-ZP-ryc" id="g0C-g1-VnW"/>
+                        <segue destination="LNJ-8k-qol" kind="presentation" identifier="editSingleImageSegue" id="mLc-qI-gMz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3lZ-R9-kdK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2821.5999999999999" y="-582.45877061469275"/>
+            <point key="canvasLocation" x="2905" y="-828"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="FaM-1H-RvV">
@@ -244,7 +256,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="g8O-32-ppj" firstAttribute="top" secondItem="0Dj-Vr-lUF" secondAttribute="top" constant="5" id="M1z-sh-ffO"/>
                                             <constraint firstAttribute="height" constant="50" id="l1s-6j-T4w"/>
@@ -275,7 +287,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="0Dj-Vr-lUF" firstAttribute="top" secondItem="iNM-vJ-gPp" secondAttribute="top" id="0YO-t6-aWs"/>
                                     <constraint firstItem="nl3-Gc-3Cv" firstAttribute="leading" secondItem="iNM-vJ-gPp" secondAttribute="leading" id="4lV-MX-PCK"/>
@@ -361,12 +373,153 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T1D-0b-uSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4550" y="-928"/>
+            <point key="canvasLocation" x="4327" y="-1418"/>
         </scene>
-        <!--Document View Controller-->
+        <!--Download View Controller-->
+        <scene sceneID="Wi0-MQ-HK3">
+            <objects>
+                <viewController storyboardIdentifier="DownloadViewController" id="4r9-kb-79O" customClass="DownloadViewController" customModule="DocScanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zKD-Id-w1a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pin-e4-u1o">
+                                <rect key="frame" x="0.0" y="20" width="375" height="95"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your url" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U4z-pY-1T6">
+                                        <rect key="frame" x="8" y="8" width="359" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="yqJ-OF-lKQ"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LsX-AC-p7h">
+                                        <rect key="frame" x="8" y="46" width="359" height="49"/>
+                                        <state key="normal" title="Download">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="downloadBtnAction:" destination="4r9-kb-79O" eventType="touchUpInside" id="3Az-0f-0PM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="LsX-AC-p7h" firstAttribute="leading" secondItem="pin-e4-u1o" secondAttribute="leading" constant="8" id="8Ab-Wy-joH"/>
+                                    <constraint firstAttribute="bottom" secondItem="LsX-AC-p7h" secondAttribute="bottom" id="8Wq-oG-bCS"/>
+                                    <constraint firstItem="U4z-pY-1T6" firstAttribute="leading" secondItem="pin-e4-u1o" secondAttribute="leading" constant="8" id="KPf-ss-TDr"/>
+                                    <constraint firstAttribute="height" constant="95" id="QTj-kc-aJS"/>
+                                    <constraint firstAttribute="trailing" secondItem="U4z-pY-1T6" secondAttribute="trailing" constant="8" id="VDM-1S-gng"/>
+                                    <constraint firstItem="LsX-AC-p7h" firstAttribute="top" secondItem="U4z-pY-1T6" secondAttribute="bottom" constant="8" id="ga4-yb-5CJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="LsX-AC-p7h" secondAttribute="trailing" constant="8" id="u6O-Q8-bsu"/>
+                                    <constraint firstItem="U4z-pY-1T6" firstAttribute="top" secondItem="pin-e4-u1o" secondAttribute="top" constant="8" id="x43-yX-M8f"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fIL-DE-zrM">
+                                <rect key="frame" x="0.0" y="123" width="375" height="544"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fIL-DE-zrM" firstAttribute="leading" secondItem="rWv-mB-kIt" secondAttribute="leading" id="Fw7-B2-cMK"/>
+                            <constraint firstItem="pin-e4-u1o" firstAttribute="trailing" secondItem="rWv-mB-kIt" secondAttribute="trailing" id="VtI-v6-bC9"/>
+                            <constraint firstItem="fIL-DE-zrM" firstAttribute="trailing" secondItem="rWv-mB-kIt" secondAttribute="trailing" id="i8d-P7-zzJ"/>
+                            <constraint firstItem="pin-e4-u1o" firstAttribute="top" secondItem="rWv-mB-kIt" secondAttribute="top" id="im8-6g-Abg"/>
+                            <constraint firstItem="pin-e4-u1o" firstAttribute="leading" secondItem="rWv-mB-kIt" secondAttribute="leading" id="kev-nw-zy7"/>
+                            <constraint firstItem="fIL-DE-zrM" firstAttribute="bottom" secondItem="rWv-mB-kIt" secondAttribute="bottom" id="nRM-8U-btA"/>
+                            <constraint firstItem="fIL-DE-zrM" firstAttribute="top" secondItem="pin-e4-u1o" secondAttribute="bottom" constant="8" id="tbz-3X-bh3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rWv-mB-kIt"/>
+                    </view>
+                    <connections>
+                        <outlet property="downlaodOptionView" destination="pin-e4-u1o" id="Vab-91-bZW"/>
+                        <outlet property="downloadBtnOutlet" destination="LsX-AC-p7h" id="lTO-X9-xuX"/>
+                        <outlet property="imageView" destination="fIL-DE-zrM" id="haX-6f-aKJ"/>
+                        <outlet property="urlTextField" destination="U4z-pY-1T6" id="y0g-ZU-fbQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XUz-a4-lIH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4976.8000000000002" y="-1417.2413793103449"/>
+        </scene>
+        <!--Editor View Controller-->
+        <scene sceneID="6Ny-m9-7Zg">
+            <objects>
+                <viewController id="LNJ-8k-qol" customClass="EditorViewController" customModule="DocScanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CxO-H1-kwH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="82g-ry-4Qe">
+                                <rect key="frame" x="0.0" y="64" width="375" height="521"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c08-N6-fcq">
+                                <rect key="frame" x="0.0" y="585" width="375" height="82"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="82" id="67h-PK-x3l"/>
+                                </constraints>
+                            </scrollView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30B-FB-dd7">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="fQF-So-B0D"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Edit" id="pD1-oV-DJf">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="nQT-eM-eIc">
+                                            <connections>
+                                                <action selector="cancelAction:" destination="LNJ-8k-qol" id="7UD-3y-OAe"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem systemItem="save" id="ZXG-kW-BjW">
+                                                <connections>
+                                                    <action selector="saveAction:" destination="LNJ-8k-qol" id="aU3-Nj-r5y"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Reset" id="CQj-7O-f77">
+                                                <connections>
+                                                    <action selector="undoAction:" destination="LNJ-8k-qol" id="0zW-Kw-dyl"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="82g-ry-4Qe" firstAttribute="leading" secondItem="aTT-cq-5js" secondAttribute="leading" id="48y-Yx-MJN"/>
+                            <constraint firstItem="82g-ry-4Qe" firstAttribute="trailing" secondItem="aTT-cq-5js" secondAttribute="trailing" id="92E-Se-4Mn"/>
+                            <constraint firstItem="c08-N6-fcq" firstAttribute="trailing" secondItem="aTT-cq-5js" secondAttribute="trailing" id="H4Z-nl-c8K"/>
+                            <constraint firstItem="c08-N6-fcq" firstAttribute="bottom" secondItem="aTT-cq-5js" secondAttribute="bottom" id="IZ5-kC-JZt"/>
+                            <constraint firstItem="30B-FB-dd7" firstAttribute="top" secondItem="aTT-cq-5js" secondAttribute="top" id="Rt0-y3-Tp1"/>
+                            <constraint firstItem="82g-ry-4Qe" firstAttribute="top" secondItem="30B-FB-dd7" secondAttribute="bottom" id="azp-Xd-8jo"/>
+                            <constraint firstItem="c08-N6-fcq" firstAttribute="top" secondItem="82g-ry-4Qe" secondAttribute="bottom" id="fjm-cC-CFD"/>
+                            <constraint firstItem="30B-FB-dd7" firstAttribute="leading" secondItem="aTT-cq-5js" secondAttribute="leading" id="jWb-kd-2m6"/>
+                            <constraint firstItem="c08-N6-fcq" firstAttribute="leading" secondItem="aTT-cq-5js" secondAttribute="leading" id="pow-w5-zzJ"/>
+                            <constraint firstItem="30B-FB-dd7" firstAttribute="trailing" secondItem="aTT-cq-5js" secondAttribute="trailing" id="yLC-uQ-GdO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aTT-cq-5js"/>
+                    </view>
+                    <connections>
+                        <outlet property="cancelOutlet" destination="nQT-eM-eIc" id="fBI-wO-S44"/>
+                        <outlet property="filtersScrollView" destination="c08-N6-fcq" id="48V-Ug-bfj"/>
+                        <outlet property="imageView" destination="82g-ry-4Qe" id="yot-dN-Fhv"/>
+                        <outlet property="saveOutlet" destination="ZXG-kW-BjW" id="MVD-Yk-aUQ"/>
+                        <outlet property="undoOutlet" destination="CQj-7O-f77" id="Jxj-gn-Tqk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IOA-6C-Rt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3157.5999999999999" y="-2088.3058470764618"/>
+        </scene>
+        <!--All Photos-->
         <scene sceneID="aP3-Fw-PKU">
             <objects>
-                <viewController id="Vc1-Ku-mZc" customClass="DocumentViewController" customModule="DocScanner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="All Photos" id="Vc1-Ku-mZc" customClass="DocumentViewController" customModule="DocScanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8k5-pU-JFy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -398,11 +551,12 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="qce-Bj-rfG" id="RLa-ud-zbm"/>
+                        <segue destination="LNJ-8k-qol" kind="presentation" identifier="EditorViewController" id="PkF-fO-ef9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xj8-BC-1kg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2822" y="-1241"/>
+            <point key="canvasLocation" x="1703" y="-1418"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rme-H7-QHu">
@@ -432,4 +586,8 @@
         <image name="flash_off" width="48" height="48"/>
         <image name="photo_icon" width="48" height="48"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="N1Z-DF-zkP"/>
+        <segue reference="PkF-fO-ef9"/>
+    </inferredMetricsTieBreakers>
 </document>

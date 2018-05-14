@@ -19,26 +19,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="diW-fz-caE">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rTd-9I-1Ow">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
-                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <wkWebViewConfiguration key="configuration">
-                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                            <wkPreferences key="preferences"/>
-                        </wkWebViewConfiguration>
-                    </wkWebView>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="diW-fz-caE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Aj2-xn-FBJ"/>
-                <constraint firstAttribute="trailing" secondItem="diW-fz-caE" secondAttribute="trailing" id="kE8-t6-lcH"/>
-                <constraint firstAttribute="bottom" secondItem="diW-fz-caE" secondAttribute="bottom" id="unS-Fz-l4h"/>
-                <constraint firstItem="diW-fz-caE" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="yuj-tJ-gqW"/>
+                <constraint firstAttribute="trailing" secondItem="rTd-9I-1Ow" secondAttribute="trailing" id="7GY-LW-4gO"/>
+                <constraint firstItem="rTd-9I-1Ow" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="91m-LI-ki4"/>
+                <constraint firstItem="rTd-9I-1Ow" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="GOg-4d-mql"/>
+                <constraint firstAttribute="bottom" secondItem="rTd-9I-1Ow" secondAttribute="bottom" id="kZ2-fQ-c7l"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="304" height="255"/>
             <connections>
-                <outlet property="webView" destination="diW-fz-caE" id="M1C-mC-MHK"/>
+                <outlet property="imageView" destination="rTd-9I-1Ow" id="aWo-13-AgJ"/>
             </connections>
             <point key="canvasLocation" x="101" y="-72"/>
         </collectionViewCell>

@@ -10,10 +10,10 @@ import UIKit
 import WebKit
 class ImageCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var imageView: UIImageView!
     var url : URL?{
         didSet{
-            
+            self.imageView.image = UIImage(contentsOfFile: url!.path)
         }
     }
     override func awakeFromNib() {

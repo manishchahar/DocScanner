@@ -11,9 +11,8 @@ import PDFKit
 class DocumentViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    let queue = DispatchQueue(label: "DocumentViewController", qos: .userInitiated, attributes: [.concurrent], autoreleaseFrequency: .workItem, target: nil)
-    var numberOfPages = 0
     var workingFilePath : URL?
+    var allFiles : [File] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -29,26 +28,26 @@ class DocumentViewController: UIViewController {
         self.collectionView.setCollectionViewLayout(layout, animated: true)
         
         self.collectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCollectionViewCell")
-        
-        DispatchQueue.main.async {
-            FileUtility.shared.splitPdf(atPath: self.workingFilePath!)
-            self.fetchDocument(atPath: self.workingFilePath!)
-        }
+        loadImages()
+    }
+    
+    func loadImages() {
+        self.allFiles.removeAll()
+        self.allFiles = FileUtility.shared.scanDirectory(directory: self.workingFilePath!)
+        allFiles = allFiles.sorted(by: { (file1, file2) -> Bool in
+            return Int(file1.name)!<Int(file2.name)!
+        })
+        self.collectionView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
-    }
-    
-    func fetchDocument(atPath path : URL) {
-        let count = FileUtility.shared.getPageCount(atPath: self.workingFilePath!)
-        if count != 0{
-            self.numberOfPages = count
-            self.collectionView.reloadData()
+        if self.view.tag == 0{
+            self.view.tag = 1
         }else{
-            self.presentAlert(title: "Failed", message: "Unable to process your request")
+            self.loadImages()
         }
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -56,15 +55,19 @@ class DocumentViewController: UIViewController {
     }
     
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
+        if let vc = segue.destination as? EditorViewController,let targetFile = self.selectedFile{
+            vc.workingFile = targetFile
+        }
      }
-     */
+    
+    var selectedFile : File?
 }
 extension DocumentViewController : UICollectionViewDelegate,UICollectionViewDataSource{
     
@@ -72,15 +75,17 @@ extension DocumentViewController : UICollectionViewDelegate,UICollectionViewData
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.numberOfPages
+        return self.allFiles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-        let url = FileUtility.shared.getSplitedPageUrl(pdfUrl: self.workingFilePath!, pageNumber: indexPath.row)
-        let request = URLRequest(url: url)
-        cell.webView.load(request)
+        cell.url = self.allFiles[indexPath.row].url
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedFile = self.allFiles[indexPath.row]
+        self.performSegue(withIdentifier: "EditorViewController", sender: self)
     }
     
 }

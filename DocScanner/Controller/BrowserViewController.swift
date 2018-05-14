@@ -121,6 +121,7 @@ extension BrowserViewController:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilesTableViewCell") as! FilesTableViewCell
         cell.fileImageView.image = self.allFiles[indexPath.row].image
         cell.titleLabel.text = self.allFiles[indexPath.row].name
+        cell.fileSizeLabel.text = self.allFiles[indexPath.row].size
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

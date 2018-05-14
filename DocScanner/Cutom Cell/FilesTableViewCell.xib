@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -21,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yb5-yS-lMl">
-                        <rect key="frame" x="66" y="0.0" width="288" height="61"/>
+                        <rect key="frame" x="66" y="0.0" width="221" height="61"/>
                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -33,20 +32,33 @@
                             <constraint firstAttribute="width" constant="40" id="ekH-nm-toh"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYg-BJ-vx5">
+                        <rect key="frame" x="295" y="0.0" width="59" height="61"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="59" id="aV6-Me-5rM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Yb5-yS-lMl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="49Y-B1-xvJ"/>
-                    <constraint firstAttribute="trailing" secondItem="Yb5-yS-lMl" secondAttribute="trailing" id="6VY-IC-sHG"/>
+                    <constraint firstAttribute="trailing" secondItem="PYg-BJ-vx5" secondAttribute="trailing" id="D0H-UY-Zzo"/>
                     <constraint firstItem="k2J-rt-qlV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Mfu-1s-VT8"/>
                     <constraint firstItem="k2J-rt-qlV" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="RRv-dc-iiA"/>
                     <constraint firstItem="Yb5-yS-lMl" firstAttribute="leading" secondItem="k2J-rt-qlV" secondAttribute="trailing" constant="10" id="Wns-bF-l38"/>
+                    <constraint firstAttribute="bottom" secondItem="PYg-BJ-vx5" secondAttribute="bottom" id="bIg-rS-RXv"/>
                     <constraint firstItem="k2J-rt-qlV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="fB1-VZ-1Qf"/>
                     <constraint firstAttribute="bottom" secondItem="Yb5-yS-lMl" secondAttribute="bottom" id="hwQ-iF-OtH"/>
+                    <constraint firstItem="PYg-BJ-vx5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="oOg-Se-UuA"/>
+                    <constraint firstItem="PYg-BJ-vx5" firstAttribute="leading" secondItem="Yb5-yS-lMl" secondAttribute="trailing" constant="8" id="oh8-VT-LoQ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="fileImageView" destination="k2J-rt-qlV" id="ydP-bU-pNI"/>
+                <outlet property="fileSizeLabel" destination="PYg-BJ-vx5" id="PXr-FU-a7F"/>
                 <outlet property="titleLabel" destination="Yb5-yS-lMl" id="tMs-10-mHb"/>
             </connections>
             <point key="canvasLocation" x="37" y="57.5"/>

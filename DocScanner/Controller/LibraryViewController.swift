@@ -37,14 +37,18 @@ class LibraryViewController: UIViewController,UINavigationControllerDelegate,UII
         
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             imagePicker.delegate = self
-            imagePicker.sourceType = .savedPhotosAlbum;
+            imagePicker.sourceType = .photoLibrary
             imagePicker.allowsEditing = false
             if let margin = self.navigationController?.navigationBar.frame.height{
-                imagePicker.view.frame = CGRect(x: 0, y: -margin, width: self.view.frame.width, height: self.view.frame.height+margin)
+                imagePicker.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
             }else{
-                imagePicker.view.frame = CGRect(x: 0, y: -50, width: self.view.frame.width, height: self.view.frame.height+50)
+                imagePicker.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
             }
             self.view.addSubview(imagePicker.view)
+            let cancel = UILabel()
+            cancel.frame = CGRect(x: imagePicker.view.frame.width*0.7, y: 0, width: imagePicker.view.frame.width*0.3, height: 44)
+            cancel.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
+            imagePicker.view.addSubview(cancel)
         }
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
