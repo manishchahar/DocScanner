@@ -62,91 +62,12 @@
                     <connections>
                         <outlet property="barBackButton" destination="SWf-uP-I9x" id="4Zc-H2-Ksl"/>
                         <outlet property="tableView" destination="1nO-pJ-0ck" id="N8J-n5-dcc"/>
-                        <segue destination="r9d-O4-Vw9" kind="show" identifier="AllFileViewController" id="EGd-sP-aTE"/>
                         <segue destination="Vc1-Ku-mZc" kind="show" identifier="DocumentViewController" id="N1Z-DF-zkP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1921" y="-220"/>
-        </scene>
-        <!--All Files-->
-        <scene sceneID="64B-Fz-doz">
-            <objects>
-                <viewController title="All Files" id="r9d-O4-Vw9" customClass="AllFileViewController" customModule="DocScanner" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bmd-p1-3gg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yAU-TL-grV">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="fileCell" id="YFF-JV-lAY">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YFF-JV-lAY" id="4eb-m0-hay">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="r9d-O4-Vw9" id="YzZ-sW-lVw"/>
-                                    <outlet property="delegate" destination="r9d-O4-Vw9" id="ICW-cX-xKv"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="yAU-TL-grV" firstAttribute="trailing" secondItem="NnJ-ge-2yU" secondAttribute="trailing" id="0Z8-r7-HjL"/>
-                            <constraint firstItem="yAU-TL-grV" firstAttribute="top" secondItem="NnJ-ge-2yU" secondAttribute="top" id="kaN-KA-4f5"/>
-                            <constraint firstItem="yAU-TL-grV" firstAttribute="bottom" secondItem="NnJ-ge-2yU" secondAttribute="bottom" id="tm1-yw-Pzj"/>
-                            <constraint firstItem="yAU-TL-grV" firstAttribute="leading" secondItem="NnJ-ge-2yU" secondAttribute="leading" id="uNG-ah-8Bp"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="NnJ-ge-2yU"/>
-                    </view>
-                    <connections>
-                        <segue destination="HOd-C0-AHc" kind="show" id="GeC-I9-ibk"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hl0-zj-cNI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4098" y="-152"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Bxy-yw-D2I">
-            <objects>
-                <viewController id="HOd-C0-AHc" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TQX-0b-LPv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mKN-Th-WYW">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="HOd-C0-AHc" id="JQZ-g8-poD"/>
-                                    <outlet property="delegate" destination="HOd-C0-AHc" id="Uj2-lX-B4Z"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="mKN-Th-WYW" firstAttribute="top" secondItem="PmP-ET-gkI" secondAttribute="top" id="12v-0c-FMI"/>
-                            <constraint firstItem="mKN-Th-WYW" firstAttribute="bottom" secondItem="PmP-ET-gkI" secondAttribute="bottom" id="1Ju-UK-MBG"/>
-                            <constraint firstItem="mKN-Th-WYW" firstAttribute="trailing" secondItem="PmP-ET-gkI" secondAttribute="trailing" id="3RV-Mr-8Eg"/>
-                            <constraint firstItem="mKN-Th-WYW" firstAttribute="leading" secondItem="PmP-ET-gkI" secondAttribute="leading" id="Bfu-uC-lUb"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="PmP-ET-gkI"/>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="mKN-Th-WYW" id="f10-BP-j58"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0aI-8v-hsU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5562" y="-179"/>
         </scene>
         <!--Create-->
         <scene sceneID="1rh-So-Seb">
@@ -156,48 +77,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRb-kl-nOq">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <color key="backgroundColor" red="1" green="0.71372549019999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sJ-S8-x4h">
-                                <rect key="frame" x="0.0" y="623" width="373" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="OdR-Ys-fzX"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem image="photo_icon" id="gXy-yD-wCv">
-                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <action selector="libraryAction:" destination="JiV-VH-6eu" id="VUu-N4-nOX"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="u6h-ys-3Sz"/>
-                                    <barButtonItem tag="1" title="vvv" image="enhancedCamera" id="m3o-Q0-n6j">
-                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <action selector="cameraAction:" destination="JiV-VH-6eu" id="OxT-fz-5cc"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="dZQ-IV-ajO"/>
-                                    <barButtonItem tag="2" image="cloudDownload_icon" style="plain" id="Ll8-Cn-IYL">
-                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <action selector="downloadAction:" destination="JiV-VH-6eu" id="fFw-M5-VgJ"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5PC-dY-VVd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <connections>
+                                    <segue destination="VS3-GP-C2n" kind="embed" id="Ezb-Wk-3be"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="9sJ-S8-x4h" firstAttribute="top" secondItem="nRb-kl-nOq" secondAttribute="bottom" id="2Ez-Q0-zHb"/>
-                            <constraint firstItem="4b2-lR-yN3" firstAttribute="trailing" secondItem="9sJ-S8-x4h" secondAttribute="trailing" constant="2" id="ES5-nO-oQS"/>
-                            <constraint firstItem="nRb-kl-nOq" firstAttribute="leading" secondItem="4b2-lR-yN3" secondAttribute="leading" id="Gsg-Bi-dCP"/>
-                            <constraint firstItem="9sJ-S8-x4h" firstAttribute="bottom" secondItem="4b2-lR-yN3" secondAttribute="bottom" id="aNy-Ve-Pdp"/>
-                            <constraint firstItem="9sJ-S8-x4h" firstAttribute="leading" secondItem="oih-WH-hfs" secondAttribute="leading" id="nMV-5c-vSu"/>
-                            <constraint firstItem="nRb-kl-nOq" firstAttribute="top" secondItem="4b2-lR-yN3" secondAttribute="top" id="w21-aZ-ZqV"/>
-                            <constraint firstItem="nRb-kl-nOq" firstAttribute="trailing" secondItem="4b2-lR-yN3" secondAttribute="trailing" id="yZi-LE-M5c"/>
+                            <constraint firstItem="5PC-dY-VVd" firstAttribute="trailing" secondItem="4b2-lR-yN3" secondAttribute="trailing" id="EYB-eX-x6U"/>
+                            <constraint firstItem="5PC-dY-VVd" firstAttribute="leading" secondItem="4b2-lR-yN3" secondAttribute="leading" id="Pmp-v3-rya"/>
+                            <constraint firstItem="5PC-dY-VVd" firstAttribute="bottom" secondItem="4b2-lR-yN3" secondAttribute="bottom" id="qLd-B5-ZdQ"/>
+                            <constraint firstItem="5PC-dY-VVd" firstAttribute="top" secondItem="4b2-lR-yN3" secondAttribute="top" id="ypE-J7-7aY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4b2-lR-yN3"/>
                     </view>
@@ -217,29 +109,44 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="cameraBtn" destination="m3o-Q0-n6j" id="pja-Om-jND"/>
-                        <outlet property="container" destination="nRb-kl-nOq" id="aTv-Uu-SAY"/>
-                        <outlet property="downloadBtn" destination="Ll8-Cn-IYL" id="0Y1-7d-CsV"/>
                         <outlet property="editBtnOutlet" destination="vaI-Hu-4ZS" id="euA-6h-JgU"/>
-                        <outlet property="libraryBtn" destination="gXy-yD-wCv" id="DAa-Aw-dtH"/>
                         <outlet property="saveBtnOutlet" destination="bLh-ZP-ryc" id="g0C-g1-VnW"/>
                         <segue destination="LNJ-8k-qol" kind="presentation" identifier="editSingleImageSegue" id="mLc-qI-gMz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3lZ-R9-kdK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2905" y="-828"/>
+            <point key="canvasLocation" x="2846" y="-199"/>
         </scene>
-        <!--Camera View Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="azG-7u-GPz">
+            <objects>
+                <tabBarController id="VS3-GP-C2n" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nXV-fw-eBu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="txj-0g-JJ7" kind="relationship" relationship="viewControllers" id="7jN-LM-JK1"/>
+                        <segue destination="EGo-1Y-Tjw" kind="relationship" relationship="viewControllers" id="kOd-zh-7Aw"/>
+                        <segue destination="4r9-kb-79O" kind="relationship" relationship="viewControllers" id="VM6-Yt-Hmc"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A9C-02-ckt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3700" y="-152"/>
+        </scene>
+        <!--Capture-->
         <scene sceneID="FaM-1H-RvV">
             <objects>
                 <viewController storyboardIdentifier="CameraViewController" id="EGo-1Y-Tjw" customClass="CameraViewController" customModule="DocScanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ENr-a0-zMo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iNM-vJ-gPp">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="534"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Dj-Vr-lUF">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -265,7 +172,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nl3-Gc-3Cv">
-                                        <rect key="frame" x="0.0" y="585" width="375" height="62"/>
+                                        <rect key="frame" x="0.0" y="472" width="375" height="62"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c4l-fI-dS3">
                                                 <rect key="frame" x="149" y="8" width="77" height="46"/>
@@ -307,6 +214,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XBg-W5-To1"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Capture" image="enhancedCamera" id="9qu-YK-gdr"/>
                     <connections>
                         <outlet property="cameraView" destination="iNM-vJ-gPp" id="SYC-pf-0jk"/>
                         <outlet property="captureBtnOutlet" destination="c4l-fI-dS3" id="LkP-hr-SM4"/>
@@ -358,29 +266,30 @@
                     <viewLayoutGuide key="safeArea" id="O19-gj-HhK"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="3649" y="-1418"/>
+            <point key="canvasLocation" x="4689" y="-376"/>
         </scene>
-        <!--Library View Controller-->
+        <!--Library-->
         <scene sceneID="T8G-FR-HRj">
             <objects>
                 <viewController storyboardIdentifier="LibraryViewController" id="txj-0g-JJ7" customClass="LibraryViewController" customModule="DocScanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wZL-bT-XkN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="fmH-KU-4Jz"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Library" image="photo_icon" landscapeImage="photo_icon" largeContentSizeImage="photo_icon" id="LCX-de-ozI"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T1D-0b-uSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4327" y="-1418"/>
+            <point key="canvasLocation" x="4689" y="-965"/>
         </scene>
-        <!--Download View Controller-->
+        <!--Download-->
         <scene sceneID="Wi0-MQ-HK3">
             <objects>
                 <viewController storyboardIdentifier="DownloadViewController" id="4r9-kb-79O" customClass="DownloadViewController" customModule="DocScanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zKD-Id-w1a">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pin-e4-u1o">
@@ -418,7 +327,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fIL-DE-zrM">
-                                <rect key="frame" x="0.0" y="123" width="375" height="544"/>
+                                <rect key="frame" x="0.0" y="123" width="375" height="431"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -433,6 +342,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rWv-mB-kIt"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Download" image="cloudDownload_icon" id="Ut3-g8-LeP"/>
                     <connections>
                         <outlet property="downlaodOptionView" destination="pin-e4-u1o" id="Vab-91-bZW"/>
                         <outlet property="downloadBtnOutlet" destination="LsX-AC-p7h" id="lTO-X9-xuX"/>
@@ -442,7 +352,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUz-a4-lIH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4976.8000000000002" y="-1417.2413793103449"/>
+            <point key="canvasLocation" x="4690" y="229"/>
         </scene>
         <!--Editor View Controller-->
         <scene sceneID="6Ny-m9-7Zg">
@@ -514,7 +424,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IOA-6C-Rt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3157.5999999999999" y="-2088.3058470764618"/>
+            <point key="canvasLocation" x="2734" y="-1993"/>
         </scene>
         <!--All Photos-->
         <scene sceneID="aP3-Fw-PKU">
@@ -587,7 +497,7 @@
         <image name="photo_icon" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="N1Z-DF-zkP"/>
-        <segue reference="PkF-fO-ef9"/>
+        <segue reference="lGI-i8-IzA"/>
+        <segue reference="mLc-qI-gMz"/>
     </inferredMetricsTieBreakers>
 </document>

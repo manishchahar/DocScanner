@@ -48,8 +48,6 @@ class CreateViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var container: UIView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         saveBtnOutlet.isEnabled = false
@@ -57,7 +55,6 @@ class CreateViewController: UIViewController {
         // Do any additional setup after loading the view.
         clearCache()
         
-        self.libraryAction(self.libraryBtn)
         Animation.shared.make(dragableView: self.capturedImageView, onView: self.view)
         self.capturedImageView.frame = CGRect(x: 0, y: self.view.frame.height-144, width: 90, height: 100)
         self.capturedImageView.layer.cornerRadius = 10
@@ -72,19 +69,9 @@ class CreateViewController: UIViewController {
         FileUtility.shared.deleteFile(url: FileUtility.shared.getCachedDirectory()!)
     }
     
-    func checkAndRemoveExtraPickerView(){
-        for v in self.container.subviews{
-            v.removeFromSuperview()
-        }
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        if(view.tag == 0){
-            view.tag = 1
-        }else{
-            self.libraryAction(self.libraryBtn)
-        }
+        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -96,71 +83,6 @@ class CreateViewController: UIViewController {
     
     
     
-    //MARK: - Toolbar
-    
-    @IBOutlet weak var libraryBtn: UIBarButtonItem!
-    
-    @IBOutlet weak var cameraBtn: UIBarButtonItem!
-    
-    @IBOutlet weak var downloadBtn: UIBarButtonItem!
-    
-    @IBAction func libraryAction(_ sender: UIBarButtonItem) {
-        libraryBtn.tintColor = UIColor.blue
-        libraryBtn.isEnabled = false
-        cameraBtn.tintColor = UIColor.darkGray
-        cameraBtn.isEnabled = true
-        downloadBtn.tintColor = UIColor.darkGray
-        downloadBtn.isEnabled = true
-        
-        removeExistingSubviews()
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "LibraryViewController") as! LibraryViewController
-        vc.delegate = self
-        vc.view.frame = CGRect(x: 0, y: 0, width: self.container.frame.width, height: self.container.frame.height)
-        self.container.addSubview(vc.view)
-        self.addChildViewController(vc)
-    }
-    @IBAction func cameraAction(_ sender: UIBarButtonItem) {
-        libraryBtn.tintColor = UIColor.darkGray
-        libraryBtn.isEnabled = true
-        cameraBtn.tintColor = UIColor.blue
-        cameraBtn.isEnabled = false
-        downloadBtn.tintColor = UIColor.darkGray
-        downloadBtn.isEnabled = true
-        
-        removeExistingSubviews()
-        
-        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
-        vc.view.frame = CGRect(x:0,y:0,width:self.container.frame.width,height:self.container.frame.height)
-        self.addChildViewController(vc)
-        vc.delegate = self
-        self.container.addSubview(vc.view)
-    }
-    
-    @IBAction func downloadAction(_ sender: UIBarButtonItem) {
-        libraryBtn.tintColor = UIColor.darkGray
-        libraryBtn.isEnabled = true
-        cameraBtn.tintColor = UIColor.darkGray
-        cameraBtn.isEnabled = true
-        downloadBtn.tintColor = UIColor.blue
-        downloadBtn.isEnabled = false
-        
-        removeExistingSubviews()
-        
-        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "DownloadViewController") as! DownloadViewController
-        vc.view.frame = CGRect(x:0,y:0,width:self.container.frame.width,height:self.container.frame.height)
-        self.addChildViewController(vc)
-        vc.delegate = self
-        self.container.addSubview(vc.view)
-    }
-    func removeExistingSubviews() {
-        for v in self.container.subviews{
-            v.removeFromSuperview()
-        }
-    }
-    
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -168,13 +90,14 @@ class CreateViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if let vc = segue.destination as? DocumentViewController{
             vc.workingFilePath = FileUtility.shared.getCachedDirectory()
+        }else{
+            self.addChildViewController(segue.destination)
         }
     }
     
     
     
     //MARK:Edit operation
-    
     
     @IBOutlet weak var editBtnOutlet: UIBarButtonItem!
     
