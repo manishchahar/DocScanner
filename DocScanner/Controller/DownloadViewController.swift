@@ -10,7 +10,6 @@ import UIKit
 
 class DownloadViewController: UIViewController {
     
-    
     var delegate : ImageCaptureDelegate?
     @IBOutlet weak var downlaodOptionView: UIView!
     @IBOutlet weak var urlTextField: UITextField!

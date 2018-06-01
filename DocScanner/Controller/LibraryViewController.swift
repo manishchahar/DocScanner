@@ -8,7 +8,10 @@
 
 import UIKit
 class LibraryViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate {
+    
+    public static let shared = LibraryViewController()
     var delegate : ImageCaptureDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.startPhotoAlbum()
@@ -31,10 +34,10 @@ class LibraryViewController: UIViewController,UINavigationControllerDelegate,UII
      }
      */
     
-    
+    let imagePicker = UIImagePickerController()
+
     func startPhotoAlbum() {
-        let imagePicker = UIImagePickerController()
-        
+        self.addChildViewController(imagePicker)
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
@@ -51,9 +54,14 @@ class LibraryViewController: UIViewController,UINavigationControllerDelegate,UII
             imagePicker.view.addSubview(cancel)
         }
     }
+    
+    
+    override func viewDidLayoutSubviews() {
+        
+    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.delegate?.didCaptured(image: image)
+            CaptureImageSharing.shared.image = image.fixOrientation()
         }
     }
 }

@@ -109,6 +109,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="containerView" destination="5PC-dY-VVd" id="0WD-Cx-vMu"/>
                         <outlet property="editBtnOutlet" destination="vaI-Hu-4ZS" id="euA-6h-JgU"/>
                         <outlet property="saveBtnOutlet" destination="bLh-ZP-ryc" id="g0C-g1-VnW"/>
                         <segue destination="LNJ-8k-qol" kind="presentation" identifier="editSingleImageSegue" id="mLc-qI-gMz"/>
@@ -193,14 +194,26 @@
                                             <constraint firstItem="c4l-fI-dS3" firstAttribute="centerX" secondItem="nl3-Gc-3Cv" secondAttribute="centerX" id="uHU-WA-gWq"/>
                                         </constraints>
                                     </view>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="InV-mU-e9t">
+                                        <rect key="frame" x="6" y="435" width="363" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29" id="GmB-Mt-Vi7"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="zoomSliderAction:" destination="EGo-1Y-Tjw" eventType="valueChanged" id="hwJ-ZE-qDR"/>
+                                        </connections>
+                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="0Dj-Vr-lUF" firstAttribute="top" secondItem="iNM-vJ-gPp" secondAttribute="top" id="0YO-t6-aWs"/>
                                     <constraint firstItem="nl3-Gc-3Cv" firstAttribute="leading" secondItem="iNM-vJ-gPp" secondAttribute="leading" id="4lV-MX-PCK"/>
                                     <constraint firstAttribute="trailing" secondItem="nl3-Gc-3Cv" secondAttribute="trailing" id="OKM-hf-kVe"/>
+                                    <constraint firstItem="nl3-Gc-3Cv" firstAttribute="top" secondItem="InV-mU-e9t" secondAttribute="bottom" constant="8" id="USI-bH-2pG"/>
                                     <constraint firstItem="0Dj-Vr-lUF" firstAttribute="leading" secondItem="iNM-vJ-gPp" secondAttribute="leading" id="Ude-AF-xtu"/>
                                     <constraint firstAttribute="trailing" secondItem="0Dj-Vr-lUF" secondAttribute="trailing" id="eYV-wr-ysL"/>
+                                    <constraint firstAttribute="trailing" secondItem="InV-mU-e9t" secondAttribute="trailing" constant="8" id="o18-cv-pMs"/>
+                                    <constraint firstItem="InV-mU-e9t" firstAttribute="leading" secondItem="iNM-vJ-gPp" secondAttribute="leading" constant="8" id="sm8-PC-uGS"/>
                                     <constraint firstAttribute="bottom" secondItem="nl3-Gc-3Cv" secondAttribute="bottom" id="wIx-0V-aHl"/>
                                 </constraints>
                             </view>
@@ -222,6 +235,7 @@
                         <outlet property="flashBtnOutlet" destination="g8O-32-ppj" id="u9h-9i-K6w"/>
                         <outlet property="flashOptionView" destination="C4Y-nZ-Fk0" id="UMF-c7-Fag"/>
                         <outlet property="settingsView" destination="0Dj-Vr-lUF" id="qgZ-hv-UYj"/>
+                        <outlet property="zoomSliderOutlet" destination="InV-mU-e9t" id="nv0-iK-756"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yu5-Kw-V1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -266,7 +280,7 @@
                     <viewLayoutGuide key="safeArea" id="O19-gj-HhK"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="4689" y="-376"/>
+            <point key="canvasLocation" x="4688.8000000000002" y="-376.46176911544228"/>
         </scene>
         <!--Library-->
         <scene sceneID="T8G-FR-HRj">
@@ -497,7 +511,7 @@
         <image name="photo_icon" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lGI-i8-IzA"/>
+        <segue reference="N1Z-DF-zkP"/>
         <segue reference="mLc-qI-gMz"/>
     </inferredMetricsTieBreakers>
 </document>

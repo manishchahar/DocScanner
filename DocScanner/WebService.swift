@@ -40,4 +40,12 @@ class WebService{
         }
         task.resume()
     }
+    
+    func sendFile(fileUrl:URL) -> String {
+        let response = ""
+        if let file = FileUtility.shared.getPdfDocument(url: fileUrl){
+            
+        }
+        return response
+    }
 }

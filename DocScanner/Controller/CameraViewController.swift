@@ -13,18 +13,35 @@ protocol ImageCaptureDelegate {
     func didCaptured(image:UIImage)
 }
 class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate {
+    public static let shared = CameraViewController()
     var delegate:ImageCaptureDelegate?
+    
+    
+    @IBOutlet weak var zoomSliderOutlet: UISlider!
+    
+    @IBAction func zoomSliderAction(_ sender: UISlider) {
+        do{
+            try self.devices.first?.lockForConfiguration()
+            self.devices.first?.videoZoomFactor = CGFloat(sender.value)
+            self.devices.first?.unlockForConfiguration()
+        }catch{
+            
+        }
+    }
     
     @IBOutlet var flashOptionView: UIView!
     
     @IBAction func flashOnAction(_ sender: UIButton) {
         self.flashBtnOutlet.setImage(UIImage(named: "flash_on")?.tint(with:UIColor.white), for: .normal)
-
+        
         let device = AVCaptureDevice.default(for: AVMediaType.video)
         do{
             try device?.lockForConfiguration()
-            device?.torchMode = .on
-            self.removeFlashOptionView()
+            if(device!.isTorchModeSupported(.on)){
+                device?.torchMode = .on
+                self.removeFlashOptionView()
+                }
+                device?.unlockForConfiguration()
         }
         catch {
             print(error)
@@ -33,13 +50,16 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
     
     @IBAction func flashoffAction(_ sender: UIButton) {
         self.flashBtnOutlet.setImage(UIImage(named: "flash_off")?.tint(with:UIColor.white), for: .normal)
-
-
+        
+        
         let device = AVCaptureDevice.default(for: AVMediaType.video)
         do{
             try device?.lockForConfiguration()
+            if(device!.isTorchModeSupported(.off)){
             device?.torchMode = .off
+            }
             self.removeFlashOptionView()
+            device?.unlockForConfiguration()
         }
         catch {
             print(error)
@@ -51,8 +71,11 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
         let device = AVCaptureDevice.default(for: AVMediaType.video)
         do{
             try device?.lockForConfiguration()
-            device?.torchMode = .auto
+            if(device!.isTorchModeSupported(.auto)){
+                device?.torchMode = .auto
+            }
             self.removeFlashOptionView()
+            device?.unlockForConfiguration()
         }
         catch {
             print(error)
@@ -68,10 +91,10 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
     
     @IBAction func flashBtnAction(_ sender: UIButton) {
         if(flashOptionView.isDescendant(of: settingsView)){
-
+            
             Animation.shared.slideOutToLeft(view: flashOptionView)
         }else{
-
+            
             flashOptionView.frame = CGRect(x:50,y:0,width:settingsView.frame.width-50,height:settingsView.frame.height)
             Animation.shared.slideInFromLeft(parentView: settingsView, childView: flashOptionView)
         }
@@ -85,19 +108,16 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
     var devices : [AVCaptureDevice] = {
         let captureDevices = AVCaptureDevice.devices().filter{ $0.hasMediaType(AVMediaType.video) && $0.position == AVCaptureDevice.Position.back
         }
-    
         return captureDevices
     }()
     
     @IBAction func capturebtnAction(_ sender: UIButton) {
         if let videoConnection = stillImageOutput.connection(with: AVMediaType.video) {
-            videoConnection.videoOrientation = .portrait
             stillImageOutput.captureStillImageAsynchronously(from: videoConnection) {
                 (imageDataSampleBuffer, error) -> Void in
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer!)
                 if let image = UIImage(data: imageData!){
-                
-                    self.delegate?.didCaptured(image: image.rotate(radians: 0))
+                    CaptureImageSharing.shared.image = image.fixOrientation()
                 }
             }
         }
@@ -108,95 +128,57 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
     let captureSession = AVCaptureSession()
     let stillImageOutput = AVCaptureStillImageOutput()
     var error: NSError?
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         self.flashBtnOutlet.setImage(UIImage(named: "flash_off")?.tint(with:UIColor.white), for: .normal)
-        DispatchQueue.main.async {
-            self.prepareCamera()
-            self.setVideoOrientation()
-        }
         self.captureBtnOutlet.setImage(UIImage(named: "camera")?.tint(with: UIColor.blue), for: .normal)
+        self.prepareCamera()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
-
     }
-    
-    
     
     override func viewDidLayoutSubviews() {
-        self.previewLayer?.frame = CGRect(x: 0, y: 0, width: Int(self.cameraView!.frame.width), height: Int(self.cameraView!.frame.height))
-        setVideoOrientation()
-    }
-    
-    func setVideoOrientation() {
-        let videoOrientation: AVCaptureVideoOrientation
-        switch UIApplication.shared.statusBarOrientation {
-        case .portrait:
-            videoOrientation = .portrait
-        case .portraitUpsideDown:
-            videoOrientation = .portraitUpsideDown
-        case .landscapeLeft:
-            videoOrientation = .landscapeLeft
-        case .landscapeRight:
-            videoOrientation = .landscapeRight
-        default:
-            videoOrientation = .portrait
+        self.previewLayer?.frame = self.cameraView!.bounds
+        let orientation = UIDevice.current.orientation
+        if let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue){
+            self.previewLayer?.connection?.videoOrientation = videoOrientation
         }
-        previewLayer?.connection?.videoOrientation = videoOrientation
     }
-    
     
     var previewLayer : AVCaptureVideoPreviewLayer?
+    
     func prepareCamera() {
         if(self.captureSession.inputs.count>0){
             print("inputs already there")
-        }
-        //Add inputs
-        if let captureDevice = self.devices.first as? AVCaptureDevice  {
-            
-            try? captureSession.addInput(AVCaptureDeviceInput(device: captureDevice))
-            
-            captureSession.sessionPreset = AVCaptureSession.Preset.photo
-            captureSession.startRunning()
-            stillImageOutput.outputSettings = [AVVideoCodecKey:AVVideoCodecJPEG]
-            if captureSession.canAddOutput(stillImageOutput) {
-                captureSession.addOutput(stillImageOutput)
-            }
-            previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-            previewLayer?.connection?.videoOrientation = .portrait
-            
-            //            previewLayer.position = CGPoint(view.bounds.midX, view.bounds.midY)
-            previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-            previewLayer?.frame = self.cameraView!.frame
-            previewLayer?.bounds = (cameraView?.bounds)!
-            cameraView?.layer.addSublayer(previewLayer!)
-            //            cameraPreview.addGestureRecognizer(UITapGestureRecognizer(target: self, action:"saveToCamera:"))
-            
-            self.cameraView?.addSubview(self.settingsView)
-            self.cameraView?.addSubview(self.captureView)
-        }
-    }
-    
-    func saveToCamera(sender: UITapGestureRecognizer) {
-        if let videoConnection = stillImageOutput.connection(with: AVMediaType.video) {
-            videoConnection.videoOrientation = .portrait
-            stillImageOutput.captureStillImageAsynchronously(from: videoConnection) {
-                (imageDataSampleBuffer, error) -> Void in
-                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer!)
-                UIImageWriteToSavedPhotosAlbum(UIImage(data: imageData!)!, nil, nil, nil)
+        }else{
+            if let captureDevice = self.devices.first {
+                try? captureSession.addInput(AVCaptureDeviceInput(device: captureDevice))
+                captureSession.sessionPreset = AVCaptureSession.Preset.photo
+                captureSession.startRunning()
+                stillImageOutput.outputSettings = [AVVideoCodecKey:AVVideoCodecJPEG]
+                if captureSession.canAddOutput(stillImageOutput) {
+                    captureSession.addOutput(stillImageOutput)
+                }
+                previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+                previewLayer?.connection?.videoOrientation = .portrait
+                previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                let previewFrame = CGRect(x: 0, y: 0, width: self.cameraView!.frame.width, height: self.cameraView!.frame.height)
+                previewLayer?.frame = previewFrame
+                self.cameraView?.layer.addSublayer(previewLayer!)
+                self.cameraView?.bringSubview(toFront: self.settingsView)
+                self.cameraView?.bringSubview(toFront: self.captureView)
+                //            cameraPreview.addGestureRecognizer(UITapGestureRecognizer(target: self, action:"saveToCamera:"))
+                self.zoomSliderOutlet.minimumValue = Float(captureDevice.minAvailableVideoZoomFactor)
+                self.zoomSliderOutlet.value = Float(captureDevice.minAvailableVideoZoomFactor)
+                self.zoomSliderOutlet.maximumValue = Float(captureDevice.maxAvailableVideoZoomFactor)
+                self.cameraView?.bringSubview(toFront: self.zoomSliderOutlet)
             }
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.captureSession.stopRunning()
-        cameraView?.layer.sublayers?.first?.removeFromSuperlayer()
-        ///Remove inputs
-        if let inputs = self.captureSession.inputs as? [AVCaptureDeviceInput] {
-            for input in inputs {
-                self.captureSession.removeInput(input)
-            }
-        }
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

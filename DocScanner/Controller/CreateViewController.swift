@@ -15,6 +15,8 @@ class CreateViewController: UIViewController {
     
     @IBOutlet weak var saveBtnOutlet: UIBarButtonItem!
     
+    @IBOutlet weak var containerView: UIView!
+    
     @IBAction func saveBtnAction(_ sender: UIBarButtonItem) {
         AlertUtil.shared.alertWithTextField(parent: self, title: "Save", message: "Enter name for your new document", placeholder: "File Name", value: "", proceedTitle: "Save", cancelTitle: "Later", didProceed: { (fileName) in
             self.storeDocument(fileName: fileName)
@@ -46,6 +48,7 @@ class CreateViewController: UIViewController {
         for file in allImageFiles{
             FileUtility.shared.deleteFile(url: file.url)
         }
+        self.allImage = []
     }
     
     override func viewDidLoad() {
@@ -92,6 +95,7 @@ class CreateViewController: UIViewController {
             vc.workingFilePath = FileUtility.shared.getCachedDirectory()
         }else{
             self.addChildViewController(segue.destination)
+            CaptureImageSharing.shared.delegate = self
         }
     }
     
@@ -105,7 +109,19 @@ class CreateViewController: UIViewController {
         
     }
     //MARK: Capture delegate
-    var allImage : [UIImage] = []
+    var allImage : [UIImage] = []{
+        didSet{
+            if(allImage.count>0){
+                self.capturedImageView.isHidden = false
+                self.editBtnOutlet.isEnabled = true
+                self.saveBtnOutlet.isEnabled = true
+            }else{
+                self.capturedImageView.isHidden = true
+                self.editBtnOutlet.isEnabled = false
+                self.saveBtnOutlet.isEnabled = false
+            }
+        }
+    }
     var imageCount = 0
     let capturedImageView = UIImageView()
     let imageTapGesture = UITapGestureRecognizer()
@@ -127,6 +143,18 @@ extension CreateViewController:ImageCaptureDelegate{
     }
     @objc func tappeCapturedImageView(gesture:UITapGestureRecognizer){
 //        Animation.shared.scale(view: self.capturedImageView)
+    }
+}
+
+struct CaptureImageSharing {
+    var delegate : ImageCaptureDelegate?
+    public static var shared = CaptureImageSharing()
+    var image : UIImage? = nil{
+        didSet{
+            if(image != nil){
+                delegate?.didCaptured(image: image!)
+            }
+        }
     }
 }
 
