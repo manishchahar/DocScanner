@@ -115,9 +115,11 @@ class CameraViewController: UIViewController,AVCaptureVideoDataOutputSampleBuffe
         if let videoConnection = stillImageOutput.connection(with: AVMediaType.video) {
             stillImageOutput.captureStillImageAsynchronously(from: videoConnection) {
                 (imageDataSampleBuffer, error) -> Void in
-                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer!)
-                if let image = UIImage(data: imageData!){
-                    CaptureImageSharing.shared.image = image.fixOrientation()
+                if let imageBuffer = imageDataSampleBuffer{
+                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageBuffer)
+                    if let image = UIImage(data: imageData!){
+                        CaptureImageSharing.shared.image = image.fixOrientation()
+                    }
                 }
             }
         }

@@ -118,7 +118,6 @@ class EditorViewController: UIViewController {
         let newImage = UIImage(cgImage: outputImage!)
         self.imageView.image = newImage
         UIGraphicsEndImageContext()
-
     }
     
     /*

@@ -55,6 +55,16 @@ class FileUtility{
         }
     }
     
+    func moveFile(from fromUrl: URL, to toUrl:URL) -> String {
+        var errorMsg = ""
+        do {
+            try? FileManager.default.moveItem(at: fromUrl, to: toUrl)
+            return ""
+        } catch {
+            return error.localizedDescription
+        }
+    }
+    
     func renameDirectory(atPath path : URL, newName name : String) -> String {
         var currentPath = path
 
@@ -110,6 +120,14 @@ class FileUtility{
         let path = directory.appendingPathComponent(fileName)
         do{
             try fileManager.createFile(atPath: path.path, contents: file, attributes: nil)
+            return ""
+        }catch{
+            return error.localizedDescription.description
+        }
+    }
+    func writeFile(directory:URL,file:Data) -> String {
+        do{
+            try fileManager.createFile(atPath: directory.path, contents: file, attributes: nil)
             return ""
         }catch{
             return error.localizedDescription.description
@@ -237,7 +255,6 @@ class FileUtility{
         var size = "Bytes"
         // check if the url is a directory
         if (try? directoryUrl.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true {
-            print("url is a folder url")
             // lets get the folder files
             var folderSize = 0
             (try? FileManager.default.contentsOfDirectory(at: directoryUrl, includingPropertiesForKeys: nil))?.lazy.forEach {
@@ -273,19 +290,31 @@ class FileUtility{
         return size
     }
     func fileSize(fileAt fileUrl:URL) -> String {
-        var fileSize : UInt64 = 0
+        var fileSize : Double = 0
         do {
             //return [FileAttributeKey : Any]
             let attr = try FileManager.default.attributesOfItem(atPath: fileUrl.path)
-            fileSize = attr[FileAttributeKey.size] as! UInt64
+            fileSize = attr[FileAttributeKey.size] as! Double
             //if you convert to NSDictionary, you can get file size old way as well.
             let dict = attr as NSDictionary
-            fileSize = dict.fileSize()
+            fileSize = Double(dict.fileSize())
         } catch {
             print("Error: \(error)")
         }
-        fileSize = fileSize/1000000
-        return fileSize.description + "MB"
+        
+        var formattedFileSize = ""
+        if(fileSize >= 1000){
+            fileSize = fileSize/1000
+            if(fileSize >= 1000){
+                fileSize = fileSize/1000
+                formattedFileSize = fileSize.rounded(places: 1).description + "MB"
+            }else{
+                formattedFileSize = fileSize.rounded(places: 1).description + "KB"
+            }
+        }else{
+            formattedFileSize = fileSize.rounded(places: 1).description + "Bytes"
+        }
+        return formattedFileSize
     }
 }
 

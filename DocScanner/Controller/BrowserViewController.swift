@@ -90,6 +90,7 @@ class BrowserViewController: UIViewController {
             case "DocumentViewController":
                 if let vc = segue.destination as? DocumentViewController{
                     vc.workingFilePath = self.selectedDirectory
+                    vc.deleteAllImages()
                 }
                 break
             default :
@@ -118,10 +119,14 @@ extension BrowserViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FilesTableViewCell") as! FilesTableViewCell
-        cell.fileImageView.image = self.allFiles[indexPath.row].image
-        cell.titleLabel.text = self.allFiles[indexPath.row].name
-        cell.fileSizeLabel.text = self.allFiles[indexPath.row].size
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "FilesTableViewCell") as! FilesTableViewCell
+//        cell.fileImageView.image = self.allFiles[indexPath.row].image
+//        cell.titleLabel.text = self.allFiles[indexPath.row].name
+//        cell.fileSizeLabel.text = self.allFiles[indexPath.row].size
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        cell.imageView?.image = self.allFiles[indexPath.row].image
+        cell.textLabel?.text = self.allFiles[indexPath.row].name
+        cell.detailTextLabel?.text = self.allFiles[indexPath.row].size
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -139,7 +144,6 @@ extension BrowserViewController:UITableViewDelegate,UITableViewDataSource{
         return true
     }
     
-    
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // action one for delete operation
         let deleteAction = self.contextualDeleteAction(forRowAt: indexPath)
@@ -148,10 +152,13 @@ extension BrowserViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        //        let editAction = self.contextualEditAction(forRowAt: indexPath)
+        let editAction = self.contextualEditAction(forRowAt: indexPath)
         let renameAction = self.contextRenameAction(forRowAt: indexPath)
-        
-        return UISwipeActionsConfiguration(actions: [renameAction])
+        if(self.allFiles[indexPath.row].type == FileType.folder){
+            return UISwipeActionsConfiguration(actions: [renameAction])
+        }else{
+            return UISwipeActionsConfiguration(actions: [renameAction,editAction])
+        }
     }
     
     func contextualDeleteAction(forRowAt indexPath : IndexPath) -> UIContextualAction {
@@ -167,15 +174,18 @@ extension BrowserViewController:UITableViewDelegate,UITableViewDataSource{
         }
         action.image = UIImage(named: "delete_forever")
         action.title = "Delete"
+        action.backgroundColor = UIColor.red
         return action
     }
     
     func contextualEditAction(forRowAt indexPath:IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "Edit") { (contextAction, sourceView, completionHandler) in
             self.selectedDirectory = self.allFiles[indexPath.row].url
-            
             self.performSegue(withIdentifier: "DocumentViewController", sender: self)
+            completionHandler(true)
         }
+        action.title = "Edit"
+        action.backgroundColor = UIColor.green
         return action
     }
     
@@ -206,7 +216,7 @@ extension BrowserViewController:UITableViewDelegate,UITableViewDataSource{
                 completionHandler(false)
             })
         }
-        
+        action.backgroundColor = UIColor.blue
         return action
     }
 }

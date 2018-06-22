@@ -31,14 +31,14 @@ class CreateViewController: UIViewController {
                 self.pdfDocument.insert(page!, at: imageCount)
                 imageCount += 1
             }
-            let errorMsg = FileUtility.shared.writeFile(directory: self.workingDirectory!, file: self.pdfDocument.dataRepresentation()!, fileName: "\(fileName).pdf")
-            if(errorMsg != ""){
-                self.presentAlert(title: "Failed", message: errorMsg.appending("\n Please try Again!"))
-            }else{
-                self.presentAlert(title: "Success", message: "File saved successfully")
-                DispatchQueue.main.async {
-                    self.deleteAllImages()
-                }
+        }
+        let errorMsg = FileUtility.shared.writeFile(directory: self.workingDirectory!, file: self.pdfDocument.dataRepresentation()!, fileName: "\(fileName).pdf")
+        if(errorMsg != ""){
+            self.presentAlert(title: "Failed", message: errorMsg.appending("\n Please try Again!"))
+        }else{
+            self.presentAlert(title: "Success", message: "File saved successfully")
+            DispatchQueue.main.async {
+                self.deleteAllImages()
             }
         }
     }
@@ -129,13 +129,16 @@ class CreateViewController: UIViewController {
 extension CreateViewController:ImageCaptureDelegate{
     func didCaptured(image: UIImage) {
         self.capturedImageView.image = image
-        Animation.shared.popUp(parentView: self.view, childView: self.capturedImageView)
+        self.view.addSubview(self.capturedImageView)
         let imageRepresentation = UIImagePNGRepresentation(image)
-        let errorMsg = FileUtility.shared.writeFile(directory: FileUtility.shared.getCachedDirectory()!, file: imageRepresentation!, fileName: "\(imageCount).png")
+        let fileName = "\(imageCount).png"
+        let cachedDirectory = FileUtility.shared.getCachedDirectory()!
+        let errorMsg = FileUtility.shared.writeFile(directory: cachedDirectory, file: imageRepresentation!, fileName: fileName)
         
         if(errorMsg != ""){
             self.presentAlert(title: "Failed", message: errorMsg)
         }else{
+            DispatchUtil.shared.submitAsync(task: ImageRenderer.shared.renderExistingImage(at: cachedDirectory.appendingPathComponent(fileName)))
             imageCount += 1
         }
         saveBtnOutlet.isEnabled = true

@@ -19,6 +19,7 @@ class Animation: NSObject{
         })
     }
     
+    
     func popIn(view:UIView) {
         UIView.animate(withDuration: 0.25, animations: {
             view.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)

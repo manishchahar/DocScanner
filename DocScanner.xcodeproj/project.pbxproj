@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59419BBF20DBF3B1001FB799 /* ++WKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59419BBE20DBF3B1001FB799 /* ++WKWebView.swift */; };
+		59419BC120DBF56B001FB799 /* ++UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59419BC020DBF56B001FB799 /* ++UIColor.swift */; };
+		59419BC320DBF90C001FB799 /* ++UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59419BC220DBF90C001FB799 /* ++UIStoryboard.swift */; };
+		59419BC520DC04F2001FB799 /* hex_color.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59419BC420DC04F2001FB799 /* hex_color.plist */; };
+		59419C2F20DC16C5001FB799 /* tiny_mce in Resources */ = {isa = PBXBuildFile; fileRef = 59419C2E20DC16C5001FB799 /* tiny_mce */; };
+		59419C3120DC1880001FB799 /* base_editor.html in Resources */ = {isa = PBXBuildFile; fileRef = 59419C3020DC1880001FB799 /* base_editor.html */; };
+		594500C220DA2CF200650EF7 /* ImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594500C120DA2CF200650EF7 /* ImageRenderer.swift */; };
+		5970821920DAA026007B5F9A /* DispatchUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5970821820DAA026007B5F9A /* DispatchUtil.swift */; };
+		5970821D20DAB667007B5F9A /* ++Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5970821C20DAB667007B5F9A /* ++Double.swift */; };
+		5970821F20DAC4AB007B5F9A /* ++ CGPDFPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5970821E20DAC4AB007B5F9A /* ++ CGPDFPage.swift */; };
+		59B2C5A820DB882200E2B4CA /* WebEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B2C5A720DB882200E2B4CA /* WebEditorViewController.swift */; };
+		59B2C5AA20DB9BC800E2B4CA /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B2C5A920DB9BC800E2B4CA /* ColorPickerViewController.swift */; };
 		B10D9BEA20A0CD1F0028054F /* ++UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10D9BE920A0CD1F0028054F /* ++UIViewController.swift */; };
 		B11E9A0420A1FAE300442098 /* FilesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B11E9A0320A1FAE300442098 /* FilesTableViewCell.xib */; };
 		B11E9A0620A1FAF400442098 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B11E9A0520A1FAF300442098 /* LaunchScreen.storyboard */; };
@@ -55,6 +67,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		59419BBE20DBF3B1001FB799 /* ++WKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "++WKWebView.swift"; sourceTree = "<group>"; };
+		59419BC020DBF56B001FB799 /* ++UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "++UIColor.swift"; sourceTree = "<group>"; };
+		59419BC220DBF90C001FB799 /* ++UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "++UIStoryboard.swift"; sourceTree = "<group>"; };
+		59419BC420DC04F2001FB799 /* hex_color.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = hex_color.plist; sourceTree = "<group>"; };
+		59419C2E20DC16C5001FB799 /* tiny_mce */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tiny_mce; sourceTree = "<group>"; };
+		59419C3020DC1880001FB799 /* base_editor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = base_editor.html; sourceTree = "<group>"; };
+		594500C120DA2CF200650EF7 /* ImageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRenderer.swift; sourceTree = "<group>"; };
+		5970821820DAA026007B5F9A /* DispatchUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchUtil.swift; sourceTree = "<group>"; };
+		5970821C20DAB667007B5F9A /* ++Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "++Double.swift"; sourceTree = "<group>"; };
+		5970821E20DAC4AB007B5F9A /* ++ CGPDFPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "++ CGPDFPage.swift"; sourceTree = "<group>"; };
+		59B2C5A720DB882200E2B4CA /* WebEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebEditorViewController.swift; sourceTree = "<group>"; };
+		59B2C5A920DB9BC800E2B4CA /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		B10D9BE920A0CD1F0028054F /* ++UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "++UIViewController.swift"; sourceTree = "<group>"; };
 		B11E9A0320A1FAE300442098 /* FilesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilesTableViewCell.xib; sourceTree = "<group>"; };
 		B11E9A0520A1FAF300442098 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -121,7 +145,12 @@
 			isa = PBXGroup;
 			children = (
 				B15F941B20A1D7DA0074ECAA /* ++UIImageView.swift */,
+				59419BC020DBF56B001FB799 /* ++UIColor.swift */,
 				B10D9BE920A0CD1F0028054F /* ++UIViewController.swift */,
+				59419BBE20DBF3B1001FB799 /* ++WKWebView.swift */,
+				5970821C20DAB667007B5F9A /* ++Double.swift */,
+				5970821E20DAC4AB007B5F9A /* ++ CGPDFPage.swift */,
+				59419BC220DBF90C001FB799 /* ++UIStoryboard.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -130,9 +159,11 @@
 			isa = PBXGroup;
 			children = (
 				B1F1384820A0218500969EC1 /* Animation.swift */,
+				5970821820DAA026007B5F9A /* DispatchUtil.swift */,
 				B11E9A0720A1FE6400442098 /* AlertUtil.swift */,
 				B15F941D20A1D8050074ECAA /* Theme.swift */,
 				B1B54E5E209DE2C900BD3C70 /* FileUtility.swift */,
+				594500C120DA2CF200650EF7 /* ImageRenderer.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -146,9 +177,11 @@
 				B15E8DC6209F0D9F00C535A2 /* CreateViewController.swift */,
 				B12616E120A6A2250055C1E0 /* DownloadViewController.swift */,
 				B11E9A0E20A21AEC00442098 /* DocumentViewController.swift */,
+				59B2C5A720DB882200E2B4CA /* WebEditorViewController.swift */,
 				B15E8DC8209F0EF800C535A2 /* CameraViewController.swift */,
 				B1EE959D20A4A34A004E155A /* LibraryViewController.swift */,
 				B1B988C120A71F5B00A5AA9B /* EditorViewController.swift */,
+				59B2C5A920DB9BC800E2B4CA /* ColorPickerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -198,6 +231,9 @@
 			isa = PBXGroup;
 			children = (
 				B1EE959F20A54D0D004E155A /* Assets.xcassets */,
+				59419C2E20DC16C5001FB799 /* tiny_mce */,
+				59419BC420DC04F2001FB799 /* hex_color.plist */,
+				59419C3020DC1880001FB799 /* base_editor.html */,
 				B1E56D72209D66190098B2A8 /* AppDelegate.swift */,
 				B11E9A0B20A20B1D00442098 /* Controller */,
 				B11E9A0C20A20B2D00442098 /* Cutom Cell */,
@@ -346,6 +382,9 @@
 				B11E9A0420A1FAE300442098 /* FilesTableViewCell.xib in Resources */,
 				B1E56D78209D66190098B2A8 /* Main.storyboard in Resources */,
 				B11E9A1320A2226A00442098 /* ImageCollectionViewCell.xib in Resources */,
+				59419C3120DC1880001FB799 /* base_editor.html in Resources */,
+				59419BC520DC04F2001FB799 /* hex_color.plist in Resources */,
+				59419C2F20DC16C5001FB799 /* tiny_mce in Resources */,
 				B1EE95A020A54D0E004E155A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,21 +411,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				B11E9A1220A2226A00442098 /* ImageCollectionViewCell.swift in Sources */,
+				59419BBF20DBF3B1001FB799 /* ++WKWebView.swift in Sources */,
 				B15E8DC7209F0D9F00C535A2 /* CreateViewController.swift in Sources */,
+				5970821D20DAB667007B5F9A /* ++Double.swift in Sources */,
+				59419BC120DBF56B001FB799 /* ++UIColor.swift in Sources */,
 				B1E56D7B209D66190098B2A8 /* DocScanner.xcdatamodeld in Sources */,
 				B1E56D75209D66190098B2A8 /* ViewController.swift in Sources */,
 				B13A48FE209D97D000ACB5BD /* BrowserViewController.swift in Sources */,
+				59B2C5A820DB882200E2B4CA /* WebEditorViewController.swift in Sources */,
 				B15F941C20A1D7DA0074ECAA /* ++UIImageView.swift in Sources */,
+				5970821920DAA026007B5F9A /* DispatchUtil.swift in Sources */,
 				B11E9A0F20A21AEC00442098 /* DocumentViewController.swift in Sources */,
 				B10D9BEA20A0CD1F0028054F /* ++UIViewController.swift in Sources */,
+				59B2C5AA20DB9BC800E2B4CA /* ColorPickerViewController.swift in Sources */,
 				B12616E220A6A2250055C1E0 /* DownloadViewController.swift in Sources */,
 				B1B54E5F209DE2C900BD3C70 /* FileUtility.swift in Sources */,
+				594500C220DA2CF200650EF7 /* ImageRenderer.swift in Sources */,
 				B1E56D73209D66190098B2A8 /* AppDelegate.swift in Sources */,
 				B1E56DA6209D668A0098B2A8 /* SWRevealViewController.m in Sources */,
 				B1B54E61209DEC5100BD3C70 /* AllFileViewController.swift in Sources */,
 				B1B988C220A71F5B00A5AA9B /* EditorViewController.swift in Sources */,
 				B15F941420A1C4880074ECAA /* FilesTableViewCell.swift in Sources */,
+				59419BC320DBF90C001FB799 /* ++UIStoryboard.swift in Sources */,
 				B1F1384920A0218500969EC1 /* Animation.swift in Sources */,
+				5970821F20DAC4AB007B5F9A /* ++ CGPDFPage.swift in Sources */,
 				B15E8DC9209F0EF800C535A2 /* CameraViewController.swift in Sources */,
 				B11E9A0820A1FE6400442098 /* AlertUtil.swift in Sources */,
 				B1EE959E20A4A34A004E155A /* LibraryViewController.swift in Sources */,
